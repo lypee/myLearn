@@ -5,7 +5,6 @@ import (
 	"log"
 	"math/rand"
 	"time"
-	"unsafe"
 )
 
 func GenRandNumberByRange(start, end int) int {
@@ -35,7 +34,9 @@ func main() {
 	eList := make([]Energy, 0)
 	eList = append(eList, e1, e2)
 	var energy Energy
-	log.Println(unsafe.Sizeof(e1))
+	log.Println(e1)
+
+
 	for i := range eList {
 		energy = eList[i]
 		log.Println(fmt.Sprintf("%p", &energy))
