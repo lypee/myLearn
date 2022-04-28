@@ -2,11 +2,9 @@ package pdf
 
 import (
 	"bytes"
-	 	"html/template"
+	"html/template"
 	"strings"
-
-	logger "git.100tal.com/wangxiao_go_lib/xesLogger"
-		)
+)
 
 //pdf requestpdf struct
 type RequestPdf struct {
@@ -39,7 +37,6 @@ func (r *RequestPdf) ParseTemplate(templateFileName string, data interface{}) er
 func (r *RequestPdf) GeneratePDF(htmlBody string) (*wkhtmltopdf.PDFGenerator, bool, error) {
 	pdfg, err := wkhtmltopdf.NewPDFGenerator()
 	if err != nil {
-		logger.E("NewPDFGenerator", "err:[%+v]", err)
 		return pdfg, false, err
 	}
 
@@ -52,7 +49,6 @@ func (r *RequestPdf) GeneratePDF(htmlBody string) (*wkhtmltopdf.PDFGenerator, bo
 
 	err = pdfg.Create()
 	if err != nil {
-		logger.E("GeneratePDF", "err:[%+v]", err)
 		return pdfg, false, err
 	}
 	return pdfg, true, nil
