@@ -1,15 +1,14 @@
-
-
 package main
-import (
-"fmt"
-"os"
-"strings"
-"time"
 
-"github.com/Shopify/sarama"
-"github.com/bsm/sarama-cluster" //support automatic consumer-group rebalancing and offset tracking
-"github.com/golang/glog"
+import (
+	"fmt"
+	"os"
+	"strings"
+	"time"
+
+	"github.com/Shopify/sarama"
+	"github.com/bsm/sarama-cluster" //support automatic consumer-group rebalancing and offset tracking
+	"github.com/golang/glog"
 )
 
 func main() {
@@ -43,4 +42,17 @@ func main() {
 		fmt.Fprintf(os.Stdout, "%s/%d/%d\t%s\n", msg.Topic, msg.Partition, msg.Offset, msg.Value)
 		c.MarkOffset(msg, "") //MarkOffset 并不是实时写入kafka，有可能在程序crash时丢掉未提交的offset
 	}
+}
+
+//type backoffFunc func(retries, maxRetries int) time.Duration
+
+func testSend() {
+
+	config := sarama.NewConfig()
+	config.Producer.Flush.Messages = 1
+	config.Producer.Return.Successes = true
+	config.Producer.Retry.BackoffFunc(1, 3)
+	servers := []string{""}
+	sarama.NewAsyncProducer(servers, config)
+
 }

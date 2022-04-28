@@ -2,6 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/engineering/snowFlake" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/engineering/snowFlake/snowFlake" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/engineering/timewheel" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/learn/timewheel" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/timewheel" vcs="Git" />
