@@ -6,7 +6,6 @@ import (
 )
 
 type TaskPool struct {
-	Ctx      context.Context
 	canFunc  context.CancelFunc
 	IsStop   bool
 	Worker   chan func()
@@ -15,10 +14,7 @@ type TaskPool struct {
 }
 
 func NewPool(ctx context.Context, size int) *TaskPool {
-	poolCtx, cancel := context.WithCancel(ctx)
 	return &TaskPool{
-		Ctx:      poolCtx,
-		canFunc:  cancel,
 		Worker:   make(chan func()),
 		Size:     make(chan struct{}, size),
 		StopChan: make(chan struct{}),
@@ -30,13 +26,12 @@ func (pool *TaskPool) AddTask(task func()) {
 		log.Println("TaskPool isStop!")
 		return
 	}
-	ctx, _ := context.WithCancel(pool.Ctx)
 
 	select {
 	case pool.Worker <- task:
 		log.Println("add task")
 	case pool.Size <- struct{}{}:
-		go pool.worker(ctx)
+		go pool.worker()
 
 	}
 }
@@ -54,16 +49,13 @@ func (pool *TaskPool) ModerateStop() {
 	pool.canFunc()
 
 }
-func (pool *TaskPool) worker(ctx context.Context) {
+func (pool *TaskPool) worker() {
 	defer func() {
 		<-pool.Size
 	}()
 
 	for {
 		select {
-		case <-ctx.Done():
-			log.Println("Doneee!")
-			return
 		case task, ok := <-pool.Worker:
 			if !ok {
 				return

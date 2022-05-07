@@ -23,12 +23,12 @@ func main() {
 func testWithValue(ctx context.Context) {
 	sCtx1 := context.WithValue(ctx, "key", "value")
 	log.Println(sCtx1.Value("key"))
-	sCtx2 , _ := context.WithCancel(ctx)
+	sCtx2, _ := context.WithCancel(ctx)
 	// 父子Ctx直接Value不传递
 	log.Println(sCtx2.Value("key"))
 
 }
-func timeTest(){
+func timeTest() {
 	timeNow := time.Now()
 	tt := int64(1647846990) //2022-2-26
 	timeTt := time.Unix(tt, 0)
@@ -53,3 +53,9 @@ func test() {
 	context.WithValue(ctx1, "123", "456")
 	log.Println(parentCtx.Value("123"))
 }
+
+type Value struct {
+}
+
+
+
