@@ -13,6 +13,7 @@ require (
 	github.com/facebookgo/stack v0.0.0-20160209184415-751773369052 // indirect
 	github.com/facebookgo/subset v0.0.0-20200203212716-c811ad88dec4 // indirect
 	github.com/golang/glog v1.0.0
+	github.com/jfeliu007/goplantuml v1.6.1 // indirect
 	github.com/leeyazhou/gorocksdb v0.0.0-20180520154517-6a7201101bae
 	github.com/lypee/snowFlake v0.0.1-omage
 	github.com/petermattis/goid v0.0.0-20220331194723-8ee3e6ded87a // indirect

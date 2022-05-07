@@ -47,7 +47,6 @@ func main() {
 //type backoffFunc func(retries, maxRetries int) time.Duration
 
 func testSend() {
-
 	config := sarama.NewConfig()
 	config.Producer.Flush.Messages = 1
 	config.Producer.Return.Successes = true

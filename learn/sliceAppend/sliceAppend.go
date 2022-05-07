@@ -4,15 +4,34 @@ import (
 	"log"
 	"sort"
 	"time"
+	"unsafe"
 )
 
 type Person struct {
-	Age  int
-	Name string
+	Age        int
+	Name       string
 	CreateTime time.Time
 }
 
 func main() {
+	testAppend()
+	return
+}
+
+func testAppend() {
+	s := make([]int, 0)
+	log.Println(unsafe.Pointer(&s), " ", s, " ", len(s), " ", cap(s))
+
+	testAppend2(&s)
+	log.Println(unsafe.Pointer(&s), " ", s, " ", len(s), " ", cap(s))
+}
+func testAppend2(s *[]int) {
+	//log.Println("testAppend2 ", unsafe.Pointer(&s), " ", s, " ", len(s), " ", cap(s))
+	*s = append(*s, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+	//log.Println("testAppend2 ", unsafe.Pointer(&s), " ", s, " ", len(s), " ", cap(s))
+
+}
+func testEnter() {
 	p1 := Person{
 		Age:  1,
 		Name: "",
@@ -39,9 +58,7 @@ func main() {
 	//handle(s1)
 	//log.Println(s1)
 	test()
-	return
 }
-
 func handle(arr []Person) []Person {
 	arr = arr[:1]
 	return arr
@@ -49,31 +66,27 @@ func handle(arr []Person) []Person {
 func test() {
 	s := make([]Person, 0, 1)
 	p1 := Person{
-		Age:  1,
-		Name: "",
-		CreateTime: time.Unix(1646620003 ,0),
+		Age:        1,
+		Name:       "",
+		CreateTime: time.Unix(1646620003, 0),
 	}
 	p2 := Person{
-		Age:  2,
-		Name: "",
-		CreateTime: time.Unix(1646621003 ,0),
-
+		Age:        2,
+		Name:       "",
+		CreateTime: time.Unix(1646621003, 0),
 	}
 	p3 := Person{
-		Age:  3,
-		Name: "",
-		CreateTime: time.Unix(1646622503 ,0),
-
+		Age:        3,
+		Name:       "",
+		CreateTime: time.Unix(1646622503, 0),
 	}
 	p4 := Person{
-		Age: 4,
-		CreateTime: time.Unix(1646622203 ,0),
-
+		Age:        4,
+		CreateTime: time.Unix(1646622203, 0),
 	}
 	p5 := Person{
-		Age: 5,
-		CreateTime: time.Unix(1646622003 ,0),
-
+		Age:        5,
+		CreateTime: time.Unix(1646622003, 0),
 	}
 	//id := 4
 	s = append(s, p1, p2, p3, p4, p5)
@@ -96,7 +109,7 @@ func test() {
 	//	}
 	//}
 	//log.Println(s)
-	sort.Slice(s , func(i, j int) bool {
+	sort.Slice(s, func(i, j int) bool {
 		return s[i].CreateTime.Before(s[j].CreateTime)
 	})
 	log.Println(s)
