@@ -47,12 +47,15 @@ func main() {
 //type backoffFunc func(retries, maxRetries int) time.Duration
 
 func testSend() {
-
 	config := sarama.NewConfig()
 	config.Producer.Flush.Messages = 1
 	config.Producer.Return.Successes = true
 	config.Producer.Retry.BackoffFunc(1, 3)
 	servers := []string{""}
 	sarama.NewAsyncProducer(servers, config)
+}
+
+func testConsume(){
+	sc ,_ := sarama.NewConsumer([]string{} , sarama.NewConfig())
 
 }

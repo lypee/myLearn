@@ -57,7 +57,7 @@ func print2(p interface{}) {
 		log.Println("Array")
 	case reflect.Slice:
 		vv := reflect.ValueOf(v)
-		sv := reflect.MakeSlice(vv.Type() ,vv.Len() , vv.Cap())
+		sv := reflect.MakeSlice(vv.Type(), vv.Len(), vv.Cap())
 		log.Println(sv)
 		log.Println("Slice")
 	case reflect.Interface:
@@ -67,4 +67,11 @@ func print2(p interface{}) {
 	default:
 		log.Println("default")
 	}
+}
+
+func print3(p interface{}) bool {
+	if reflect.TypeOf(p).Kind() == reflect.Int {
+		return false
+	}
+	return true
 }

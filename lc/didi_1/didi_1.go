@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"log"
+	"sort"
 )
 
 
@@ -12,18 +13,27 @@ type ListNode struct{
 	Next *ListNode
 }
 //
-func main() {
-	l1 := &ListNode{
-		Val:  1,
-		Next: nil,
-	}
-	l2 := &ListNode{
-		Val:  1,
-		Next: nil,
-	}
-	head := mergeTwoLists(l1 , l2 )
-	log.Println(head )
+
+type Person struct{
+	Age int
 }
+func main() {
+	p1 := Person{
+		Age: 1,
+	}
+	p2 := Person{
+		Age: 2,
+	}
+	p3 := Person{
+		Age: 3,
+	}
+	pList := []Person{p1, p2, p3}
+	sort.Slice(pList , func(i, j int) bool {
+		return pList[i].Age > pList[j].Age
+	})
+	log.Println(pList)
+}
+
 
 func mergeTwoLists( l1 *ListNode ,  l2 *ListNode ) *ListNode {
 	// write code here

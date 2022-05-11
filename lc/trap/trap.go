@@ -22,22 +22,23 @@ func trap(height []int) int {
 	return ans
 }
 
-func tra2p(height []int) int {
-	res := 0
+func tra2p(height []int) int{
 	length := len(height)
-	lMax, rMax := 0, 0
-	l, r := 0, length-1
-	for l <= r {
-		lMax, rMax = max(lMax, height[l]), max(rMax, height[r])
-		if height[l] < height[r] {
+	lMax , rMax := 0 ,0
+	res := 0
+	l , r := 0 ,length - 1
+	for l <= r{
+		lMax = max(lMax , height[l])
+		rMax = max(rMax , height[r])
+		if height[l] < height[r]{
 			res += lMax - height[l]
 			l++
-		} else {
+		}else{
 			res += rMax - height[r]
 			r--
 		}
 	}
-	return res
+	return res 
 }
 
 func max(arr ...int) int {

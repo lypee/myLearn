@@ -11,26 +11,25 @@ var (
 )
 
 func isValidBST(root *TreeNode) bool {
-
 	arrs = []int{}
-	arrs = help(root)
-	if len(arrs) <= 1 {
+	help(root)
+	if len(arrs) < 1 {
 		return true
 	}
-	for i := 0 ; i < len(arrs) - 1 ; i++{
-		if arrs[i]  >= arrs[i+1]{
+	for i := 1 ; i < len(arrs) ; i++{
+		if arrs[i] <= arrs[i-1]{
 			return false
 		}
 	}
 	return true
 }
 
-func help(root *TreeNode) []int{
-	if root == nil{
-		return arrs
+func help(node *TreeNode){
+	if node == nil{
+		return
 	}
-	help(root.Left)
-	arrs = append(arrs , root.Val)
-	help(root.Right)
-	return arrs
+	help(node.Left)
+	arrs = append(arrs , node.Val)
+	help(node.Right)
+	return
 }
