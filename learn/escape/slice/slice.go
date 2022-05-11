@@ -4,7 +4,7 @@ func main() {
 	escapeEntrance()
 	select {}
 }
-
+// longestPalindrome
 func escapeEntrance() {
 	s1 := make([]string, 10, 10)
 	escapeTest(s1)

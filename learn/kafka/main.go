@@ -53,5 +53,9 @@ func testSend() {
 	config.Producer.Retry.BackoffFunc(1, 3)
 	servers := []string{""}
 	sarama.NewAsyncProducer(servers, config)
+}
+
+func testConsume(){
+	sc ,_ := sarama.NewConsumer([]string{} , sarama.NewConfig())
 
 }
