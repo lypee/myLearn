@@ -106,3 +106,9 @@ func printLetter(ch chan int) {
 		}
 	}
 }
+
+
+// channel
+func four(){
+
+}
