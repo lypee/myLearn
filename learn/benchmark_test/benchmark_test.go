@@ -42,13 +42,14 @@ type Person struct {
 
 func BenchmarkTestRangeStruct1(b *testing.B) {
 	arrs := make([]Person, 10000, 10000)
-	var tmp Person
+	//var tmp Person
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for i := 0; i < 2000000; i++ {
 		for j := 0; j < len(arrs); j++ {
-			tmp = arrs[j]
+			tmp := arrs[j]
+			_ = tmp
 		}
-		_ = tmp
+
 	}
 }
 
@@ -56,7 +57,7 @@ func BenchmarkTestRangeStruct2(b *testing.B) {
 	arrs := make([]Person, 10000, 10000)
 	var tmp Person
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
+	for i := 0; i < 2000000; i++ {
 		for _, item := range arrs {
 			tmp = item
 		}

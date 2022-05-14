@@ -56,6 +56,4 @@ func testSend() {
 }
 
 func testConsume(){
-	sc ,_ := sarama.NewConsumer([]string{} , sarama.NewConfig())
-
 }

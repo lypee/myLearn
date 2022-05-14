@@ -13,8 +13,9 @@ func main(){
 	add3()
 }
 
+// 卡牌背包新增
 func add3(){
-	base := "ALTER TABLE `live_encourage`.`xes_encourage_backpack_%d`\nADD COLUMN `gain_time` int(11) NOT NULL COMMENT '获得时间' AFTER `stuCouId`;"
+	base := "ALTER TABLE `live_encourage`.`xes_encourage_backpack_%d`\nADD COLUMN `last_gain_time` int(11) NOT NULL COMMENT '最新获得时间' AFTER `stuCouId`;"
 	for i := 0 ; i< 64 ; i++{
 		fmt.Println(fmt.Sprintf(base , i))
 	}
