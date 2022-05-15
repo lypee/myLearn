@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"reflect"
 )
@@ -13,7 +14,7 @@ func main() {
 	//p := []Person{
 	//	{Name: "1"},
 	//}
-	p2 := []int{}
+	//p2 := []int{}
 	//print2(p)
 	//print2(p2)
 	//
@@ -26,7 +27,7 @@ func main() {
 	//var str string
 	//print(str)
 	//str := "123"
-	print2(p2)
+	print4()
 }
 
 func print(p interface{}) {
@@ -75,3 +76,11 @@ func print3(p interface{}) bool {
 	}
 	return true
 }
+
+
+func print4(){
+	p := Person{}
+	t := reflect.TypeOf(p).Elem()
+	for i := 0; i < t.NumField(); i++ {
+		fmt.Printf("结构体内第%v个字段 %v 对应的json tag是 %v , 还有otherTag？ = %v \n", i+1, t.Field(i).Name, t.Field(i).Tag.Get("json"), t.Field(i).Tag.Get("otherTag"))
+	}}

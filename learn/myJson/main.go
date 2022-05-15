@@ -17,4 +17,7 @@ func main() {
 	//log.Println(1)
 	t := Person{}
 	log.Println(reflect.TypeOf(t).Field(0).Tag.Get("gson"))
+	for  i := 0 ; i < reflect.TypeOf(t).NumField() ; i++{
+		log.Println(reflect.TypeOf(t).Field(i).Tag.Get("json"))
+	}
 }

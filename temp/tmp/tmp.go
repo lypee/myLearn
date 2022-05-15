@@ -3,7 +3,6 @@ package main
 import (
 	"log"
 	"lpynnng/learn/lockMap"
-	"unsafe"
 )
 
 type s1 struct {
@@ -23,7 +22,6 @@ type Person struct {
 	PP   string
 }
 
-
 type T1 struct {
 	a [2]int8
 	b int64
@@ -35,11 +33,12 @@ type T2 struct {
 	b int64
 }
 
-
+const (
+	ii = 3
+)
 func main() {
-	log.Printf("内存占用大小:[%v]", unsafe.Sizeof(T1{}))
-	log.Printf("内存占用大小:[%v]", unsafe.Sizeof(T2{}))
-
+	var i int
+	log.Println(&i, i)
 }
 
 func get2() {

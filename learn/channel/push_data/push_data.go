@@ -21,12 +21,11 @@ func tPush(ch chan int, idx int) {
 	}
 }
 
-
 func tPop(ch chan int) {
-
 	for {
 		select {
 		case data, _ := <-ch:
+
 			log.Println("recv-data: ", data)
 		default:
 

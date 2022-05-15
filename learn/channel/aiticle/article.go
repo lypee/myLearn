@@ -45,6 +45,12 @@ func readV2(ch chan int) {
 			} else {
 				log.Printf("ok-false")
 			}
+		case data, ok := <-ch:
+			if ok {
+				log.Println("ok-2 , ", data)
+			} else {
+				log.Println("ok-2 ")
+			}
 		default:
 			log.Println("into-default")
 		}
@@ -55,12 +61,12 @@ func consumer() {
 }
 func chn() {
 	ch := make(chan int)
-	go write(ch , 1 )
+	go write(ch, 1)
 
 	//time.Sleep(2  * time.Second)
 
 	close(ch)
-	write(ch ,1 )
+	write(ch, 1)
 	//log.Println(<- ch)
 
 	time.Sleep(time.Minute)
@@ -69,28 +75,27 @@ func chn() {
 func forRange() {
 	ch := make(chan int, 1)
 	go readV2(ch)
-	go write(ch ,1 )
+	go write(ch, 1)
 
 	time.Sleep(time.Second)
 	log.Println("休眠1s")
 
-	go write(ch ,1 )
+	go write(ch, 1)
 	time.Sleep(time.Minute)
 }
 
-
-func onlyReadAndWrite(){
-	ch := make(chan int ,1)
+func onlyReadAndWrite() {
+	ch := make(chan int, 1)
 	onlyRead(ch)
 	onlyWrite(ch)
 }
 
 // 参数为只读channel
-func onlyRead(ch <-chan int ){
-	<- ch
+func onlyRead(ch <-chan int) {
+	<-ch
 }
 
 // 参数为只写channel
-func onlyWrite(ch chan<- int ){
-	 ch <- 1
+func onlyWrite(ch chan<- int) {
+	ch <- 1
 }
