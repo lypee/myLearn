@@ -1,17 +1,29 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"time"
 )
 
 func main() {
-	tmp4()
+	tmp6()
 }
 
 var (
 	i int
 )
+
+func tmp6(){
+	ch := make(chan int, 1)
+	for i := 0; i < 10; i++ {
+		select {
+		case x := <-ch:
+			fmt.Println(x)
+		case ch <- i:
+		}
+	}
+}
 
 func tmp4() {
 	i = 0
