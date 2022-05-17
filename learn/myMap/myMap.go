@@ -30,20 +30,27 @@ type Person struct {
 	Mmap3 map[int]int
 }
 
+var (
+	basePrintInfo = "%s addr:[%v] "
+)
+
 func main() {
-	sizeOf()
+	enterMapTest()
 }
 
-func sizeOf(){
-	mmap1 := map[int]int{
-		1: 1,
-		2: 2,
-		3: 3,
-	}
-	str1  , _ := json.Marshal(mmap1)
+func enterMapTest() {
 
-	log.Println(unsafe.Sizeof(PkCommonID{}) , " " , unsafe.Sizeof(Args{})  , unsafe.Sizeof(ArgsWithClassId{}))
+	mmap := make(map[int]int, 0)
+
+	getMapPtr("mmap", &mmap)
+
 }
+
+func testMapNil() {
+	mmap := map[int]Person{}
+	mmap[1] = Person{}
+}
+
 func unMarshalMap() {
 	mmap1 := map[int]int{
 		1: 1,
@@ -85,10 +92,6 @@ func unMarshalMap() {
 	log.Println(pp)
 	return
 }
-func testMapNil() {
-	mmap := map[int]Person{}
-	mmap[1] = Person{}
-}
 
 func testSliceNil() {
 	var s1 []int
@@ -96,4 +99,9 @@ func testSliceNil() {
 	s2 := []int{}
 	log.Println(nil == s1)
 	log.Println(nil == s2)
+}
+
+func getMapPtr(name string, mmap *map[int]int) {
+
+	log.Printf(basePrintInfo, name, unsafe.Pointer(mmap))
 }
